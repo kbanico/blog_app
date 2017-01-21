@@ -1,0 +1,12 @@
+<% @posts.each do |post| %>
+  <div class="blockquote col-xs-12 col-sm-6">
+
+      <h1><%= post.title %></h1>
+
+      <p><%= post.description %></p>
+      <small><%= link_to "Show page", post_path(post) %></small>
+      <small><%= link_to "edit page", edit_post_path(post) %></small>
+  </div>
+<% end %>
+
+

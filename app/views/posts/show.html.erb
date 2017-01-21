@@ -1,0 +1,23 @@
+<div class="blockquote">
+  <h1>This is the show page for <%= @post.title %></h1>
+  <p><%= @post.description %></p>
+  <p>Delete this post <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %> </p>
+
+  <% @post.comments.each do |comment| %>
+    <p><%= comment.message %></p>
+    <p><%= link_to "Delete Message", [@post, comment], method: :delete, data: {confirm: "Are you sure?"} %></p>
+
+  <% end %>
+
+
+
+</div>
+
+
+
+<%= simple_form_for @comment, url: post_comments_path(@post) do |f| %>
+    <%= f.input :message %>
+    <%= f.submit "Post Your Comment", class: "btn btn-success" %>
+
+
+  <% end %>

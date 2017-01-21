@@ -1,0 +1,8 @@
+<h1>Enter Your Post</h1>
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title %>
+  <%= f.text_area :description %>
+  <br>
+  <%= f.submit "Create", class: "btn btn-success" %>
+
+<% end %>

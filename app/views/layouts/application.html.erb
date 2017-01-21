@@ -7,8 +7,95 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "kjdesigns", root_path, class: "navbar-brand" %>
+    </div>
 
-<%= yield %>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "New Post", new_post_path %></li>
+        <li><%=link_to "New Post","#", data:{toggle: "modal", target: "#myModal"} %></li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <ul class="alert-<%= name %>">
+      <li><%= msg %></li>
+    </ul>
+  <% end %>
+  <% if flash[:error].present? %>
+    <div class="col-xs-10 col-xs-offset-1 alert-danger">
+      <%= flash[:error].html_safe %>
+    </div>
+  <% end %>
+
+
+
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Post Your Thoughts Here</h4>
+        </div>
+
+          <%= simple_form_for Post.new do |f| %>
+
+            <div class="modal-body">
+
+              <%= f.input :title %>
+              <%= f.text_area :description %>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+              <%= f.submit "Create", class: "btn btn-success" %>
+
+            </div>
+
+          <% end %>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <%= yield %>
+
+</div>
+
+
+
+
 
 </body>
 </html>
